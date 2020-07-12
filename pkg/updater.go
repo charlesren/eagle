@@ -23,6 +23,10 @@ fmt.Println(stock,"already exists!")
 }
 else {
 	sl.Name[stock] = struct{}
-
 }
+}
+func(sl *StockList) DeleteStock(stock string) {
+sl.Lock.Lock
+defer sl.Lock.UnLock
+delete（sl.Name，stock)
 }
