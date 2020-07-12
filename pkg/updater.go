@@ -1,22 +1,28 @@
 package updater
-type BookedStocks interface{
-	AddStock([]string) BookedStocks
-	DeleteStock([]string) BookedStocks
-    AddMetricsSet(StockMetrics) BookedStocks
-    DeleteMetricsSet(StockMetrics) BookedStocks
+type StockSet interface{
+	AddStock(string) StockSet
+	DeleteStock(string) StockSet
 }
 type StockList struct(
 	Name map[string]struct{}
-	MetricsSet []StockMetrics
+	Lock sync.Mutex
 )
-type StockMetrics interface{
-	GetMetrics() struct{} bool
-	}
-type MovingAverageMetrics struct{
-	20Day string
-	60Day string
-	250Day string
+type DefaultMetrics struct{
+	Open       float64
+	Close      float64
+	Now        float64
+	High       float64
+	Low        float64
+	Volume     float64
 }
-func（MovingAeragetMetrics)   GetMetrics struct{} bool {
-	return  MovingAverageMetrics
+func(sl *StockList) AddStock(stock string) {
+sl.Lock.Lock
+defer sl.Lock.UnLock
+if _,ok := sl.Name[stock] ; ok {
+fmt.Println(stock,"already exists!")
+}
+else {
+	sl.Name[stock] = struct{}
+
+}
 }
