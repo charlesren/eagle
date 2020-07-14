@@ -1,32 +1,38 @@
 package updater
-type StockSet interface{
+
+import (
+	"fmt"
+	"sync"
+)
+
+type StockSet interface {
 	AddStock(string) StockSet
 	DeleteStock(string) StockSet
 }
-type StockList struct(
+type StockList struct {
 	Name map[string]struct{}
 	Lock sync.Mutex
-)
-type DefaultMetrics struct{
-	Open       float64
-	Close      float64
-	Now        float64
-	High       float64
-	Low        float64
-	Volume     float64
 }
-func(sl *StockList) AddStock(stock string) {
-sl.Lock.Lock
-defer sl.Lock.UnLock
-if _,ok := sl.Name[stock] ; ok {
-fmt.Println(stock,"already exists!")
+type DefaultMetrics struct {
+	Open   float64
+	Close  float64
+	Now    float64
+	High   float64
+	Low    float64
+	Volume float64
 }
-else {
-	sl.Name[stock] = struct{}
+
+func (sl *StockList) AddStock(stock string) {
+	sl.Lock.Lock()
+	defer sl.Lock.Unlock()
+	if _, ok := sl.Name[stock]; ok {
+		fmt.Println(stock, "already exists!")
+	} else {
+		sl.Name[stock] = struct{}{}
+	}
 }
-}
-func(sl *StockList) DeleteStock(stock string) {
-sl.Lock.Lock
-defer sl.Lock.UnLock
-delete（sl.Name，stock)
+func (sl *StockList) DeleteStock(stock string) {
+	sl.Lock.Lock()
+	defer sl.Lock.Unlock()
+	delete(sl.Name, stock)
 }
