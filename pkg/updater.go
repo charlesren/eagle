@@ -5,14 +5,19 @@ import (
 	"sync"
 )
 
+//StockSet is a set of stocks
 type StockSet interface {
 	AddStock(string) StockSet
 	DeleteStock(string) StockSet
 }
+
+//StockList implement interface StockSet
 type StockList struct {
 	Name map[string]struct{}
 	Lock sync.Mutex
 }
+
+//DefaultMetrics is realtime metrics of stock
 type DefaultMetrics struct {
 	Open   float64
 	Close  float64
