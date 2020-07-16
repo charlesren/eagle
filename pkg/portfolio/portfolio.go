@@ -1,4 +1,4 @@
-package capital
+package portfolio
 
 //CapitalStock ...
 type CapitalOpenInterests struct {
