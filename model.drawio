@@ -1,10 +1,10 @@
-<mxfile host="4cec4f53-5d67-4e09-a8fc-fe184dd098b8" modified="2020-07-16T14:08:31.770Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.47.1 Chrome/78.0.3904.130 Electron/7.3.2 Safari/537.36" etag="ybN0HKFBfiRwdF02Q9tZ" version="13.1.3">
+<mxfile host="4cec4f53-5d67-4e09-a8fc-fe184dd098b8" modified="2020-07-16T15:12:22.043Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.47.1 Chrome/78.0.3904.130 Electron/7.3.2 Safari/537.36" etag="B1--U6yF9jbdc0HiLbQ-" version="13.1.3">
     <diagram id="6hGFLwfOUW9BJ-s0fimq" name="Page-1">
         <mxGraphModel dx="1126" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="Trigger" style="rounded=1;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+                <mxCell id="2" value="Quote" style="rounded=1;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
                     <mxGeometry x="110" y="500" width="60" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="BuyPolicy" style="rounded=1;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
@@ -150,7 +150,7 @@
                         <mxPoint x="14.05" y="13" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="65" value="下单" style="rounded=1;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
+                <mxCell id="65" value="broker" style="rounded=1;whiteSpace=wrap;html=1;direction=south;" parent="1" vertex="1">
                     <mxGeometry x="520" y="500" width="60" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.042;exitY=-0.017;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" edge="1">
