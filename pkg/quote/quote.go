@@ -1,4 +1,4 @@
-package updater
+package quote
 
 import (
 	"fmt"
