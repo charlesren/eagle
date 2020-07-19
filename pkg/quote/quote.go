@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"sync"
 )
-
+type Quote interface(
+	Get()
+)
 //StockSet is a set of stocks
 type StockSet interface {
 	AddStock(string) StockSet
