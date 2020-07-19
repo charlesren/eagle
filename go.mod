@@ -1,4 +1,4 @@
-module eagle
+module github.com/charlesren/eagle
 
 go 1.14
 
