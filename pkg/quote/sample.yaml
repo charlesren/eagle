@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: 600519.SH
+  labels:
+   interval: 5
+spec:
+  replicas: 1
+  template:
+    metadata:
+    spec:
+      containers:
+      - name: quote
+        image: quote:v1
+        command: [ "sina", "echo $(STOCK_NAME) $(INTERVAL)"]
+        env:
+          - name: STOCK_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: INTERVAL
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.labels['interval']
