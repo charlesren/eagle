@@ -1,4 +1,4 @@
-package sina
+package app
 
 import (
 	"fmt"
