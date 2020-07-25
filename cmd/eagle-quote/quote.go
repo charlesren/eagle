@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var date app.SinaQuoteMetrics
+	var data app.SinaQuoteMetrics
 	data = app.Get("000027.SZ")
 	fmt.Println(data)
 }
