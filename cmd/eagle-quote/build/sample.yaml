@@ -1,14 +1,18 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: 600519.SH
+  name: sh600519
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: sh600519
   template:
     metadata:
       name: 600519.SH
       labels:
-        interval: 5
+        interval: "5"
+        app: sh600519
     spec:
       containers:
       - name: quote

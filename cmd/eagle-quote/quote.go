@@ -18,6 +18,7 @@ func main() {
 	interval, err := strconv.Atoi(os.Args[2])
 	if err != nil {
 		fmt.Println("wrong interval")
+		return
 	}
 	var data app.SinaQuoteMetrics
 	for {
