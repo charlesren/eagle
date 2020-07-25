@@ -14,10 +14,10 @@ type SinaQuoteMetrics struct {
 	Time     string
 }
 
-//Get func get lastest value
+//Get func fetch lastest data from sina
 func Get(stockCode string) SinaQuoteMetrics {
 	var sqm SinaQuoteMetrics
-	tmpData := quotesina.GetData(stcokCode)
+	tmpData := quotesina.GetData(stockCode)
 	sqm.Open = tmpData.Open
 	sqm.Now = tmpData.Now
 	sqm.High = tmpData.High
