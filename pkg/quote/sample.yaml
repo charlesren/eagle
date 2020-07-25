@@ -13,9 +13,10 @@ spec:
       containers:
       - name: quote
         image: quote:v1
-        command: [ "sina", "echo $(STOCK_NAME) $(INTERVAL)"]
+        command: [ "quote"]
+        args: ["STOCKCODE", "INTERVAL"]
         env:
-          - name: STOCK_NAME
+          - name: STOCKCODE
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
