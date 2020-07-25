@@ -14,7 +14,7 @@ spec:
       - name: quote
         image: quote:v1
         command: [ "quote"]
-        args: ["STOCKCODE", "INTERVAL"]
+        args: ["$(STOCKCODE)", "$(INTERVAL)"]
         env:
           - name: STOCKCODE
             valueFrom:
