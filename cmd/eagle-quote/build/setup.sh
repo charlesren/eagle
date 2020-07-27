@@ -1,8 +1,6 @@
 #!/bin/sh
 git clone https://github.com/charlesren/eagle.git
-cd eagle/cmd/eagle-quote
-go build quote.go
-mv quote build/
-cd build
+cd eagle/cmd/eagle-quote/build
+go build ../quote.go
 docker build -t quote .
-rm quote
+rm -f quote

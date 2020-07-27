@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: quote
-        image: quote:latest
+        image: quote:v1
         command: [ "quote"]
         args: ["$(STOCKCODE)", "$(INTERVAL)"]
         env:
