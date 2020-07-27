@@ -9,7 +9,7 @@ spec:
       app: sh600519
   template:
     metadata:
-      name: 600519.SH
+      name: sh600519
       labels:
         interval: "5"
         app: sh600519
@@ -23,7 +23,7 @@ spec:
           - name: STOCKCODE
             valueFrom:
               fieldRef:
-                fieldPath: metadata.name
+                fieldPath: metadata.labels['app']
           - name: INTERVAL
             valueFrom:
               fieldRef:
