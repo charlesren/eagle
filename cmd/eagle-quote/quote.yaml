@@ -1,0 +1,9 @@
+apiVersion: quote.eagle.io/v1
+kind: Dailyrange
+metadata:
+  name: sh600519
+spec:
+  open: 3.12
+  high: 4.07
+  low: 2.59
+  date: 2020-07-28

@@ -4,14 +4,10 @@ import quotesina "github.com/charlesren/sina"
 
 //SinaQuoteMetrics is realtime metrics of stock
 type SinaQuoteMetrics struct {
-	Open     float64
-	Now      float64
-	High     float64
-	Low      float64
-	Turnover int
-	Volume   float64
-	Date     string
-	Time     string
+	Open float64
+	High float64
+	Low  float64
+	Date string
 }
 
 //Get func fetch lastest data from sina
@@ -19,12 +15,8 @@ func Get(stockCode string) SinaQuoteMetrics {
 	var sqm SinaQuoteMetrics
 	tmpData := quotesina.GetData(stockCode)
 	sqm.Open = tmpData.Open
-	sqm.Now = tmpData.Now
 	sqm.High = tmpData.High
 	sqm.Low = tmpData.Low
-	sqm.Turnover = tmpData.Turnover
-	sqm.Volume = tmpData.Volume
 	sqm.Date = tmpData.Date
-	sqm.Time = tmpData.Time
 	return sqm
 }
