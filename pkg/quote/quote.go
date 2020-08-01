@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"sync"
 )
+
 type Quote interface {
-	Get(stockCode string) interface
+	Get(stockCode string) interface{}
 }
 
 //StockSet is a set of stocks
@@ -19,7 +20,6 @@ type StockList struct {
 	Name map[string]struct{}
 	Lock sync.Mutex
 }
-
 
 func (sl *StockList) AddStock(stock string) {
 	sl.Lock.Lock()
