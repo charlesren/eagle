@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync"
 )
-type Quote interface(
-	Get(stockCode string) interface()
-)
+type Quote interface {
+	Get(stockCode string) interface
+}
 
 //StockSet is a set of stocks
 type StockSet interface {
