@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/charlesren/eagle/cmd/eagle-quote/app"
+	"github.com/charlesren/eagle/pkg/quote/provider/sina"
 )
 
 func main() {
@@ -20,9 +20,9 @@ func main() {
 		fmt.Println("wrong interval")
 		return
 	}
-	var data app.SinaQuoteMetrics
+	var data sina.QuoteMetrics
 	for {
-		data = app.Get(stockName)
+		data = sina.Get(stockName)
 		fmt.Println(data)
 		time.Sleep(time.Duration(interval) * time.Second)
 	}

@@ -1,9 +1,9 @@
-package app
+package sina
 
 import quotesina "github.com/charlesren/sina"
 
-//SinaQuoteMetrics is realtime metrics of stock
-type SinaQuoteMetrics struct {
+//QuoteMetrics is realtime metrics of stock
+type QuoteMetrics struct {
 	Open float64
 	High float64
 	Low  float64
@@ -11,8 +11,8 @@ type SinaQuoteMetrics struct {
 }
 
 //Get func fetch lastest data from sina
-func Get(stockCode string) SinaQuoteMetrics {
-	var sqm SinaQuoteMetrics
+func Get(stockCode string) QuoteMetrics {
+	var sqm QuoteMetrics
 	tmpData := quotesina.GetData(stockCode)
 	sqm.Open = tmpData.Open
 	sqm.High = tmpData.High
