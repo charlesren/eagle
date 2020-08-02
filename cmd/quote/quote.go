@@ -8,7 +8,7 @@ import (
 
 	quotev1 "github.com/charlesren/eagle/pkg/api/quote/v1"
 	"github.com/charlesren/eagle/pkg/quote/provider/sina"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/dynamic"
@@ -41,7 +41,7 @@ func main() {
 	}
 	drGVRClient := client.Resource(drGVR)
 
-	dr, err := drGVRClient.Namespace("default").Get("sh600519", v1.GetOptions{})
+	dr, err := drGVRClient.Namespace("default").Get("sh600519", metav1.GetOptions{})
 	fmt.Println(dr)
 	fmt.Println(quotev1.GroupVersion)
 	stockName := os.Args[1]
