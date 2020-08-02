@@ -29,23 +29,19 @@ func main() {
 		panic(err.Error())
 	}
 
-	namespace := "default"
-	fmt.Println(namespace)
-
 	// creates the clientset
 	client, err := dynamic.NewForConfig(config)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(client)
 	drGVR := schema.GroupVersionResource{
 		Group:    "quote.eagle.io",
 		Version:  "v1",
 		Resource: "dailyranges",
 	}
-	fmt.Println(drGVR)
+	drGVRClient := client.Resource(drGVR)
 
-	dr, err := client.Resource(drGVR).Namespace("default").Get("sh600519", v1.GetOptions{})
+	dr, err := drGVRClient.Namespace("default").Get("sh600519", v1.GetOptions{})
 	fmt.Println(dr)
 	fmt.Println(quotev1.GroupVersion)
 	stockName := os.Args[1]
