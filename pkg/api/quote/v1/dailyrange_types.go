@@ -28,8 +28,10 @@ type DailyrangeSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Dailyrange. Edit Dailyrange_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Open float64 `json:"open,omitempty"`
+	High float64 `json:"high,omitempty"`
+	Low  float64 `json:"low,omitempty"`
+	Date string  `json:"date,omitempty"`
 }
 
 // DailyrangeStatus defines the observed state of Dailyrange
