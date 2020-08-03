@@ -59,7 +59,3 @@ type DailyrangeList struct {
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Dailyrange `json:"items"`
 }
-
-func init() {
-	SchemeBuilder.Register(&Dailyrange{}, &DailyrangeList{})
-}
