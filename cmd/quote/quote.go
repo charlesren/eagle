@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"time"
@@ -32,8 +33,13 @@ func main() {
 	}
 	drGVRClient := client.Resource(drGVR)
 
-	dr, err := drGVRClient.Namespace("default").Get("sh600519", metav1.GetOptions{})
-	fmt.Println(dr)
+	dr, err := drGVRClient.List(metav1.ListOptions{})
+	//dr, err := drGVRClient.Get("sh600519", metav1.GetOptions{})
+	if err != nil {
+		fmt.Println("list dr error")
+		log.Fatal(err)
+	}
+	fmt.Println("dr is ", dr)
 	stockName := os.Args[1]
 	if stockName == "" {
 		fmt.Println("stock code is nil")
