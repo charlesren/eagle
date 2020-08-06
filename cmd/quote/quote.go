@@ -8,8 +8,10 @@ import (
 	"strconv"
 	"time"
 
+	quotev1 "github.com/charlesren/eagle/pkg/api/quote/v1"
 	"github.com/charlesren/eagle/pkg/quote/provider/sina"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/rest"
@@ -49,13 +51,23 @@ func main() {
 	}
 	drGVRClient := client.Resource(drGVR)
 
-	dr, err := drGVRClient.List(metav1.ListOptions{})
+	drObj, err := drGVRClient.List(metav1.ListOptions{})
 	//dr, err := drGVRClient.Get("sh600519", metav1.GetOptions{})
 	if err != nil {
 		fmt.Println("list dr error")
 		log.Fatal(err)
 	}
-	fmt.Println("dr is ", dr)
+	fmt.Println("drObj is ", drObj)
+
+	drList := &quotev1.DailyrangeList{}
+	err = runtime.DefaultUnstructuredConverter.FromUnstructured(drObj.UnstructuredContent(), drList)
+	if err != nil {
+		panic(err)
+	}
+	for _, v := range drList.Items {
+		fmt.Println("dr : ", v.Spec)
+	}
+
 	stockName := os.Args[1]
 	if stockName == "" {
 		fmt.Println("stock code is nil")
