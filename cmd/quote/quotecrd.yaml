@@ -15,14 +15,10 @@ spec:
             spec:
               type: object
               properties:
-                open:
-                  type: number
                 high:
                   type: number
                 low:
                   type: number
-                date:
-                  type: string
   scope: Namespaced
   names:
     plural: dailyranges

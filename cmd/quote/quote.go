@@ -81,6 +81,7 @@ func main() {
 	}
 	fmt.Println("dr : ", dr.Spec)
 
+	//get lastest dr
 	stockName := os.Args[1]
 	if stockName == "" {
 		fmt.Println("stock code is nil")

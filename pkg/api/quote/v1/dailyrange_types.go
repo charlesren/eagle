@@ -28,7 +28,6 @@ type DailyrangeSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	Open float64 `json:"open,omitempty"`
 	High float64 `json:"high,omitempty"`
 	Low  float64 `json:"low,omitempty"`
 	Date string  `json:"date,omitempty"`
