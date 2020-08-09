@@ -30,7 +30,6 @@ type DailyrangeSpec struct {
 
 	High float64 `json:"high,omitempty"`
 	Low  float64 `json:"low,omitempty"`
-	Date string  `json:"date,omitempty"`
 }
 
 // DailyrangeStatus defines the observed state of Dailyrange
