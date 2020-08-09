@@ -50,23 +50,36 @@ func main() {
 		Resource: "dailyranges",
 	}
 	drGVRClient := client.Resource(drGVR)
-
-	drObj, err := drGVRClient.List(metav1.ListOptions{})
-	//dr, err := drGVRClient.Get("sh600519", metav1.GetOptions{})
+	//list drs
+	drlistObj, err := drGVRClient.List(metav1.ListOptions{})
 	if err != nil {
 		fmt.Println("list dr error")
 		log.Fatal(err)
 	}
-	fmt.Println("drObj is ", drObj)
+	fmt.Println("drlistObj is ", drlistObj)
 
 	drList := &quotev1.DailyrangeList{}
-	err = runtime.DefaultUnstructuredConverter.FromUnstructured(drObj.UnstructuredContent(), drList)
+	err = runtime.DefaultUnstructuredConverter.FromUnstructured(drlistObj.UnstructuredContent(), drList)
 	if err != nil {
 		panic(err)
 	}
 	for _, v := range drList.Items {
 		fmt.Println("dr : ", v.Spec)
 	}
+
+	//get dr
+	drObj, err := drGVRClient.Namespace("default").Get(os.Args[1], metav1.GetOptions{})
+	if err != nil {
+		fmt.Println("get dr error")
+		log.Fatal(err)
+	}
+	fmt.Println("drObj is ", drlistObj)
+	dr := &quotev1.Dailyrange{}
+	err = runtime.DefaultUnstructuredConverter.FromUnstructured(drObj.UnstructuredContent(), dr)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("dr : ", dr.Spec)
 
 	stockName := os.Args[1]
 	if stockName == "" {
