@@ -1,0 +1,19 @@
+{
+	"database" : "tushare",
+	"host" : "localhost",
+	"port" : 9000,
+	"username" : "default",
+	"password" : "",
+	"no_delay" : true ,
+	"connection_open_strategy" : "random" ,
+	"block_size" : 1000000 ,
+	"pool_size" : 100 ,
+	"debug" : false ,
+	"secure" : false ,
+	"skip_verify" : false ,
+	"tls_config" : "" ,
+	"alt_hosts" : "" ,
+	"compress" :  0 ,
+	"read_timeout" : 10 ,
+	"write_timeout" : 20
+}

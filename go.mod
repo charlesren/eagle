@@ -8,6 +8,8 @@ require (
 	github.com/google/gofuzz v1.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20200220183623-bac4c82f6975 // indirect
 	golang.org/x/sys v0.0.0-20191022100944-742c48ecaeb7 // indirect
+	gorm.io/driver/clickhouse v0.1.0
+	gorm.io/gorm v1.21.4
 	k8s.io/apimachinery v0.17.3-beta.0
 	k8s.io/client-go v0.17.0
 	k8s.io/utils v0.0.0-20200324210504-a9aa75ae1b89 // indirect
