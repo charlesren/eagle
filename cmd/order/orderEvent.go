@@ -6,26 +6,27 @@ import (
 	"os"
 
 	"encoding/csv"
-	//"github.com/charlesren/eagle/pkg/order"
 	"io"
+
+	"github.com/charlesren/eagle/pkg/order"
 	//cloudevents "github.com/cloudevents/sdk-go/v2"
 	//cehttp "github.com/cloudevents/sdk-go/v2/protocol/http"
 	//"log"
 )
 
 func main() {
-	tradeFile := "tradeOrder.csv"
-	//orders := []order.Order{}
-	f, err := os.Open(tradeFile)
+	var orders []order.Order
+	f, err := os.Open("tradeOrder.csv")
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
 	}
+	defer f.Close()
 
 	reader := csv.NewReader(f)
 
 	for {
-		//o := order.Order{}
+		o := order.Order{}
 		line, err := reader.Read()
 		if err == io.EOF {
 			break
@@ -34,6 +35,19 @@ func main() {
 			return
 		}
 		fmt.Println(line)
+		o.StockCode = line[0]
+		o.StockName = line[1]
+		//o.OrderType = line[2]
+		//o.TransactionDate = line[1]
+		//o.TransactionDateTime = line[1]
+		//o.TransactionPrice = line[5]
+		//o.TransactionVolume = line[6]
+		//o.TransactionAmount = line[7]
+		o.TransactionID = line[8]
+		o.OrderID = line[9]
+		o.ShareholderCode = line[10]
+		fmt.Println(o)
+		orders = append(orders, o)
 	}
 
 	/*
