@@ -5,7 +5,7 @@ import "time"
 type Order struct {
 	StockCode           string
 	StockName           string
-	OrderType           orderType
+	OrderType           string
 	TransactionDate     time.Time
 	TransactionDateTime time.Time
 	TransactionPrice    float64
@@ -16,9 +16,3 @@ type Order struct {
 	ShareholderCode     string
 }
 
-type orderType string
-
-const (
-	Buy  orderType = "Buy"
-	Sell orderType = "Sell"
-)
