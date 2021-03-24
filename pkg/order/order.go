@@ -1,13 +1,11 @@
 package order
 
-import "time"
-
 type Order struct {
 	StockCode           string
 	StockName           string
 	OrderType           string
-	TransactionDate     time.Time
-	TransactionDateTime time.Time
+	TransactionDate     string
+	TransactionDateTime string
 	TransactionPrice    float64
 	TransactionVolume   int64
 	TransactionAmount   float64
@@ -15,4 +13,3 @@ type Order struct {
 	OrderID             string
 	ShareholderCode     string
 }
-

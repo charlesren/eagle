@@ -4,10 +4,10 @@ go 1.14
 
 require (
 	github.com/charlesren/sina v0.0.0-20200727142401-528f80658a9f
+	github.com/cloudevents/sdk-go/v2 v2.3.1
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/gofuzz v1.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20200220183623-bac4c82f6975 // indirect
-	golang.org/x/sys v0.0.0-20191022100944-742c48ecaeb7 // indirect
 	gorm.io/driver/clickhouse v0.1.0
 	gorm.io/gorm v1.21.4
 	k8s.io/apimachinery v0.17.3-beta.0
