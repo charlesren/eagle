@@ -7,7 +7,9 @@ require (
 	github.com/cloudevents/sdk-go/v2 v2.3.1
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/gofuzz v1.1.0 // indirect
-	golang.org/x/crypto v0.0.0-20200220183623-bac4c82f6975 // indirect
+	github.com/nats-io/nats-server/v2 v2.2.1 // indirect
+	github.com/nats-io/nats.go v1.10.1-0.20210330225420-a0b1f60162f8
+	google.golang.org/protobuf v1.26.0 // indirect
 	gorm.io/driver/clickhouse v0.1.0
 	gorm.io/gorm v1.21.4
 	k8s.io/apimachinery v0.17.3-beta.0

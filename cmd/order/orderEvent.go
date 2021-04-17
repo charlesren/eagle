@@ -1,8 +1,9 @@
 package main
 
 import (
-	"context"
 	"encoding/csv"
+	"encoding/json"
+
 	//"encoding/json"
 	"fmt"
 	"io"
@@ -13,20 +14,30 @@ import (
 
 	"github.com/charlesren/eagle/pkg/order"
 	cloudevents "github.com/cloudevents/sdk-go/v2"
-	cehttp "github.com/cloudevents/sdk-go/v2/protocol/http"
+	"github.com/nats-io/nats.go"
 )
 
 func main() {
-	var orders []order.Order
+	const orderSub = "orderSub"
+	// Connect Options.
+	opts := []nats.Option{}
+	opts = append(opts, nats.Name("eagle"))
+
+	// Connect to NATS
+	nc, err := nats.Connect(nats.DefaultURL, opts...)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer nc.Close()
+	subj := orderSub
+
 	f, err := os.Open("tradeOrder.csv")
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
 	}
 	defer f.Close()
-
 	reader := csv.NewReader(f)
-
 	for {
 		o := order.Order{}
 		line, err := reader.Read()
@@ -48,38 +59,21 @@ func main() {
 		o.TransactionID = line[8]
 		o.OrderID = line[9]
 		o.ShareholderCode = line[10]
-		orders = append(orders, o)
-	}
-	fmt.Println(orders)
-	/*
-		jsonOd, err := json.Marshal(orders)
+
+		e := cloudevents.NewEvent()
+		e.SetType("eagle.order.sent")
+		e.SetSource("https://github.com/cloudevents/sdk-go/v2/samples/httpb/sender")
+		e.SetData(cloudevents.ApplicationJSON, o)
+		msg, err := json.Marshal(o)
 		if err != nil {
 			log.Fatalf("Create order JSON failed, %v\n", err.Error)
 		}
-		fmt.Println(string(jsonOd))
-	*/
-	ctx := cloudevents.ContextWithTarget(context.Background(), "http://localhost:8080/")
-
-	p, err := cloudevents.NewHTTP()
-	if err != nil {
-		log.Fatalf("failed to create protocol: %s", err.Error())
-	}
-
-	c, err := cloudevents.NewClient(p, cloudevents.WithTimeNow(), cloudevents.WithUUIDs())
-	if err != nil {
-		log.Fatalf("failed to create client, %v", err)
-	}
-
-	e := cloudevents.NewEvent()
-	e.SetType("com.cloudevents.sample.sent")
-	e.SetSource("https://github.com/cloudevents/sdk-go/v2/samples/httpb/sender")
-	e.SetData(cloudevents.ApplicationJSON, orders)
-	res := c.Send(ctx, e)
-	if cloudevents.IsUndelivered(res) {
-		log.Printf("Failed to send: %v", res)
-	} else {
-		var httpResult *cehttp.Result
-		cloudevents.ResultAs(res, &httpResult)
-		log.Printf("Sent with status code %d", httpResult.StatusCode)
+		nc.Publish(subj, msg)
+		nc.Flush()
+		if err := nc.LastError(); err != nil {
+			log.Fatal(err)
+		} else {
+			log.Printf("Published [%s] : '%s'\n", subj, msg)
+		}
 	}
 }
