@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"encoding/json"
 
 	//"encoding/json"
 	"fmt"
@@ -14,6 +13,7 @@ import (
 
 	"github.com/charlesren/eagle/pkg/order"
 	cloudevents "github.com/cloudevents/sdk-go/v2"
+	"github.com/google/uuid"
 	"github.com/nats-io/nats.go"
 )
 
@@ -61,13 +61,13 @@ func main() {
 		o.ShareholderCode = line[10]
 
 		e := cloudevents.NewEvent()
+		e.SetID(uuid.New().String())
 		e.SetType("eagle.order.sent")
-		e.SetSource("https://github.com/cloudevents/sdk-go/v2/samples/httpb/sender")
+		e.SetTime(time.Now())
+		e.SetSource("https://github.com/charlesren/eagle/pkg/order/orderEnevt")
 		e.SetData(cloudevents.ApplicationJSON, o)
-		msg, err := json.Marshal(o)
-		if err != nil {
-			log.Fatalf("Create order JSON failed, %v\n", err.Error)
-		}
+		fmt.Println(e)
+		msg := []byte(e.String())
 		nc.Publish(subj, msg)
 		nc.Flush()
 		if err := nc.LastError(); err != nil {
