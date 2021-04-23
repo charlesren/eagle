@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"runtime"
 	"time"
 
+	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/nats-io/nats.go"
 )
 
@@ -42,11 +44,16 @@ func main() {
 	}
 	//defer nc.Close()
 	subj := orderSub
-	i := 0
 	nc.Subscribe(subj, func(msg *nats.Msg) {
-		i += 1
-		fmt.Println(i)
-		printMsg(msg, i)
+		//printMsg(msg, i)
+		fmt.Printf("Got Event Context: %+v\n", msg.Subject)
+		var e cloudevents.Event
+		err := json.Unmarshal(msg.Data, &e)
+		if err != nil {
+			fmt.Printf("Got Data Error: %s\n", err.Error())
+		}
+		fmt.Printf("Got Data: %+v\n", e)
+		fmt.Printf("----------------------------\n")
 	})
 	nc.Flush()
 	//nc.Publish(subj, []byte("1"))
@@ -56,5 +63,4 @@ func main() {
 	}
 	log.Printf("Listening on [%s]", subj)
 	runtime.Goexit()
-
 }

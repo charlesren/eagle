@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"encoding/json"
 
 	//"encoding/json"
 	"fmt"
@@ -67,7 +68,7 @@ func main() {
 		e.SetSource("https://github.com/charlesren/eagle/pkg/order/orderEnevt")
 		e.SetData(cloudevents.ApplicationJSON, o)
 		fmt.Println(e)
-		msg := []byte(e.String())
+		msg, _ := json.Marshal(e)
 		nc.Publish(subj, msg)
 		nc.Flush()
 		if err := nc.LastError(); err != nil {
