@@ -7,6 +7,9 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/charlesren/eagle/pkg/config"
+	"github.com/charlesren/eagle/pkg/order"
+
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/nats-io/nats.go"
 )
@@ -32,6 +35,9 @@ func setupConnOptions(opts []nats.Option) []nats.Option {
 	return opts
 }
 func main() {
+	// connect to database
+	db := config.GetDB()
+	od := order.Order{}
 	const orderSub = "orderSub"
 	// Connect Options.
 	opts := []nats.Option{}
@@ -45,14 +51,39 @@ func main() {
 	//defer nc.Close()
 	subj := orderSub
 	nc.Subscribe(subj, func(msg *nats.Msg) {
-		//printMsg(msg, i)
 		fmt.Printf("Got Event Context: %+v\n", msg.Subject)
 		var e cloudevents.Event
 		err := json.Unmarshal(msg.Data, &e)
 		if err != nil {
 			fmt.Printf("Got Data Error: %s\n", err.Error())
 		}
-		fmt.Printf("Got Data: %+v\n", e)
+		fmt.Printf("Got Event: %+v\n", e)
+		if err := e.DataAs(&od); err != nil {
+			fmt.Printf("Got Data Error: %s\n", err.Error())
+		}
+		fmt.Printf("Got Data: %+v\n", od)
+		/*
+			if err := db.First(&od).Error; err != nil {
+				if err == gorm.ErrRecordNotFound {
+					db.Create(&od)
+				} else {
+					fmt.Printf("find order error: %v\n", err.Error)
+				}
+			} else {
+				fmt.Printf("order already exist\n")
+			}
+		*/
+		/*
+			err = db.First(&od).Error
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				db.Create(&od)
+			}
+			db.Create(&od)
+		*/
+		//db.FirstOrCreate(&od)
+		//db.Save(&od)
+		db.Create(&od)
+
 		fmt.Printf("----------------------------\n")
 	})
 	nc.Flush()
