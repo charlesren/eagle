@@ -51,43 +51,20 @@ func main() {
 	//defer nc.Close()
 	subj := orderSub
 	nc.Subscribe(subj, func(msg *nats.Msg) {
-		fmt.Printf("Got Event Context: %+v\n", msg.Subject)
 		var e cloudevents.Event
 		err := json.Unmarshal(msg.Data, &e)
 		if err != nil {
 			fmt.Printf("Got Data Error: %s\n", err.Error())
 		}
-		fmt.Printf("Got Event: %+v\n", e)
+		//fmt.Printf("Got Event: %+v\n", e)
 		if err := e.DataAs(&od); err != nil {
 			fmt.Printf("Got Data Error: %s\n", err.Error())
 		}
-		fmt.Printf("Got Data: %+v\n", od)
-		/*
-			if err := db.First(&od).Error; err != nil {
-				if err == gorm.ErrRecordNotFound {
-					db.Create(&od)
-				} else {
-					fmt.Printf("find order error: %v\n", err.Error)
-				}
-			} else {
-				fmt.Printf("order already exist\n")
-			}
-		*/
-		/*
-			err = db.First(&od).Error
-			if errors.Is(err, gorm.ErrRecordNotFound) {
-				db.Create(&od)
-			}
-			db.Create(&od)
-		*/
-		//db.FirstOrCreate(&od)
-		//db.Save(&od)
-		db.Create(&od)
-
+		fmt.Printf("Got Order Data: %+v\n", od)
+		db.Where("transaction_date_time = ?",od.TransactionDateTime).FirstOrCreate(&od)
 		fmt.Printf("----------------------------\n")
 	})
 	nc.Flush()
-	//nc.Publish(subj, []byte("1"))
 
 	if err := nc.LastError(); err != nil {
 		log.Fatal(err)
