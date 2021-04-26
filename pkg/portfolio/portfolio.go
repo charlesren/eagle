@@ -1,18 +1,17 @@
 package portfolio
 
-//CapitalStock ...
-type CapitalOpenInterests struct {
-	TotalCapital     string
-	TotalMarketValue string
-	AvailableCapital string
+// Capital ...
+type Capital struct{
+	TotalCapital     float64
+	TotalMarketValue float64
+	AvailableCapital float64
 	TotalPaperProfit float64
-	OpenInterest    map(StcokCode)Detail
 }
 //StockCode is code of stock
 type StockCode string
 
-//Detail ...
-type Detail struct {
+// Interest ...
+type Interest struct {
 	StockName         string
 	MarketValue       string
 	MarketPrice       float64
@@ -25,3 +24,6 @@ type Detail struct {
 	TodayProfitRate   float64
 	PositionRate   float64
 }
+
+// OpenInterests 
+type OpenInterests map(StcokCode)Interest
