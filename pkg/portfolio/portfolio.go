@@ -9,7 +9,7 @@ type Capital struct{
 }
 
 // Interest ...
-type Interest struct {
+type OpenInterest struct {
 	StockName         string
 	MarketValue       string
 	MarketPrice       float64
@@ -24,7 +24,7 @@ type Interest struct {
 }
 
 // OpenInterests 
-type OpenInterests map(string)Interest
+type OpenInterests map(string)OpenInterest
 
 // CapitalOpenInterests
 type CapitalOpenInterests struct {
