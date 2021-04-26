@@ -25,7 +25,7 @@ type OpenInterest struct {
 }
 
 // OpenInterests 
-type OpenInterests map(string)OpenInterest
+type OpenInterests map[string]OpenInterest
 
 // CapitalOpenInterests
 type CapitalOpenInterests struct {
