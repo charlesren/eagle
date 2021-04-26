@@ -10,6 +10,7 @@ type Capital struct{
 
 // Interest ...
 type OpenInterest struct {
+	StockCode           string
 	StockName         string
 	MarketValue       string
 	MarketPrice       float64
