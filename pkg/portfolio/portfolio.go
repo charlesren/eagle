@@ -7,8 +7,6 @@ type Capital struct{
 	AvailableCapital float64
 	TotalPaperProfit float64
 }
-//StockCode is code of stock
-type StockCode string
 
 // Interest ...
 type Interest struct {
@@ -26,4 +24,4 @@ type Interest struct {
 }
 
 // OpenInterests 
-type OpenInterests map(StcokCode)Interest
+type OpenInterests map(string)Interest
